@@ -1,11 +1,9 @@
 package com.shop.order.controller;
 
 import com.shop.entity.Product;
+import com.shop.order.fegin.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -18,19 +16,21 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/order")
 public class OrderController {
 
+//    @Autowired
+//    private RestTemplate restTemplate;
+
     @Autowired
-    private RestTemplate restTemplate;
+    private ProductFeignClient productFeignClient;
 
-    @GetMapping("/{id}")
-    public String order(Integer num){
-        Product obj = restTemplate.getForObject("http://localhost:9003/product/2",Product.class);
-        System.out.println(obj);
-        return "操作成功！";
-    }
+//    @GetMapping("/{id}")
+//    public String order(Integer num){
+//        Product obj = restTemplate.getForObject("http://localhost:9003/product/2",Product.class);
+//        System.out.println(obj);
+//        return "操作成功！";
+//    }
 
-    @GetMapping("/buy")
-    public Product order(){
-        Product product = restTemplate.getForObject("http://shop-service-product/product/2",Product.class);
-        return product;
+    @GetMapping("/buy/{id}")
+    public Product order(@PathVariable Long id){
+        return productFeignClient.findById(id);
     }
 }
