@@ -23,3 +23,5 @@ eureka:
   instance:
     #使用IP注册
     prefer-ip-address: true
+    #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
