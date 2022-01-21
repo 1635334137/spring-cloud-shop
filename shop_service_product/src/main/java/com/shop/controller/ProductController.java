@@ -3,6 +3,7 @@ package com.shop.controller;
 import com.shop.entity.Product;
 import com.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+    @Value("${server.port}")
+    private String port;
+
+    @Value("${spring.cloud.client.ip-address}")
+    private String ip;
+
     @GetMapping
     public List findAll() {
         return productService.findAll();
@@ -27,7 +34,10 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public Product findById(@PathVariable Long id) {
-        return productService.findById(id);
+        Product product = productService.findById(id);
+        //设置说明
+        product.setProductDesc("调用shop-service-product服务，ip:"+ip+",服务提供者端口："+port);
+        return product;
     }
 
     @PostMapping

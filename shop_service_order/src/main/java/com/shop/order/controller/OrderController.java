@@ -27,4 +27,10 @@ public class OrderController {
         System.out.println(obj);
         return "操作成功！";
     }
+
+    @GetMapping("/buy")
+    public Product order(){
+        Product product = restTemplate.getForObject("http://shop-service-product/product/2",Product.class);
+        return product;
+    }
 }
