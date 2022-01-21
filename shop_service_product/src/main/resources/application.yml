@@ -1,6 +1,5 @@
-server:
-  port: 9003
 spring:
+  profiles: product1
   application:
     name: shop-service-product
   datasource:
@@ -14,6 +13,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
+
+server:
+  port: 9003
+
 eureka:
   client:
     #Eureka服务端路径
@@ -23,4 +26,34 @@ eureka:
     #使用IP注册
     prefer-ip-address: true
     #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
-    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    instance-id: ${spring.cloud.client.ip-address}-1:${server.port}
+---
+spring:
+  profiles: product2
+  application:
+    name: shop-service-product
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_cloud?characterEncoding=utf8&serverTimezone=UTC
+    username: root
+    password: 123456
+  jpa:
+    database: mysql
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+
+server:
+  port: 9033
+
+eureka:
+  client:
+    #Eureka服务端路径
+    serviceUrl:
+      defalutZone: http://eureka1:8761/eureka,http://eureka2:8762/eureka
+  instance:
+    #使用IP注册
+    prefer-ip-address: true
+    #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
+    instance-id: ${spring.cloud.client.ip-address}-2:${server.port}
