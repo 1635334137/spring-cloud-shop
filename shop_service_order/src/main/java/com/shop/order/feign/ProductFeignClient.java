@@ -1,4 +1,4 @@
-package com.shop.order.fegin;
+package com.shop.order.feign;
 
 import com.shop.entity.Product;
 import org.springframework.cloud.openfeign.FeignClient;

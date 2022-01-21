@@ -1,10 +1,9 @@
 package com.shop.order.controller;
 
 import com.shop.entity.Product;
-import com.shop.order.fegin.ProductFeignClient;
+import com.shop.order.feign.ProductFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * 订单Controller
