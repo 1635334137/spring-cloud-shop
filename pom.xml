@@ -44,6 +44,7 @@
             <artifactId>lombok</artifactId>
             <version>1.18.22</version>
         </dependency>
+
     </dependencies>
 
     <dependencyManagement>
@@ -52,6 +53,15 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>Greenwich.SR3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--注意SpringCloud和alibaba的版本对应，Greenwich对应2.1.x版本，springboot2.1.x版本-->
+            <!--这里的alibaba版本更直接影响了sentinel版本以及springCloud feign集成sentinel，sentinel控制台的版本，所以很重要-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>2.1.1.RELEASE</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

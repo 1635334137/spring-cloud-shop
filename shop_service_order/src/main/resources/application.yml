@@ -15,6 +15,17 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
 
+  #客户端配置sentinel让sentinel监控到应用的情况
+  cloud:
+    sentinel:
+      transport:
+        #sentinel控制台的地址
+        dashboard: localhost:8081
+        #让sentinel监控这个应用的API端口（不能冲突，每个应用指定一个端口）
+        port: 8720
+      #关闭延时加载
+      eager: true
+
 #在服务消费方配置负载均衡策略，下面为服务提供方id及负载均衡策略
 #com.netflix.loadbalancer.RoundRobinRule ：以轮询的方式进行负载均衡。
 #com.netflix.loadbalancer.RandomRule ：随机策略
@@ -73,3 +84,12 @@ eureka:
 #  level:
 #    # Feign日志只会对日志级别为debug的做出响应
 #    com.shop.order.feign.ProductFeginClient: debug
+
+
+#feign集成sentinel配置
+feign:
+  sentinel:
+    enabled: true
+
+
+

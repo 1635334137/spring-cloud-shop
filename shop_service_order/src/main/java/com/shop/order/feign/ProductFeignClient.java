@@ -1,14 +1,15 @@
 package com.shop.order.feign;
 
 import com.shop.entity.Product;
+import com.shop.order.feign.callback.ProductFeignClientCallBack;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
-//指定需要调用的微服务名称
-@FeignClient(name = "shop-service-product")
+//指定需要调用的微服务名称 fallback指定熔断降级方法
+@FeignClient(name = "shop-service-product",fallback = ProductFeignClientCallBack.class)
 public interface ProductFeignClient {
 
     /**

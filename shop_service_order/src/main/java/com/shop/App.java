@@ -20,8 +20,8 @@ public class App {
     }
 
 //    @LoadBalanced //基于Ribbon的服务调用与负载均衡
-//    @Bean
-//    public RestTemplate getRestTemplate(){
-//        return new RestTemplate();
-//    }
+    @Bean
+    public RestTemplate getRestTemplate(){
+        return new RestTemplate();
+    }
 }
