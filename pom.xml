@@ -13,6 +13,7 @@
         <module>shop_service_user</module>
         <module>shop_service_common</module>
         <module>shop_eureka_server</module>
+        <module>shop_gateway_server</module>
     </modules>
 
     <parent>

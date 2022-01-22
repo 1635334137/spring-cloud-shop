@@ -1,0 +1,22 @@
+server:
+  port: 8088 #服务端口
+spring:
+  application:
+    name: api-gateway #指定服务名
+  cloud:
+    gateway:
+      routes:
+        #我们自定义的路由 ID，保持唯一
+        - id: product-service
+          uri: lb://shop-service-order #lb://shop-service-product  lb代表从注册中心获取服务，后面是服务名
+          #路由条件
+          predicates:
+            - Path=/order/buy/** #/product/** 匹配规则有很多种，这里的路径要和提供服务的路径一致（即要有对应的路径映射），不然找不到
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/,http://127.0.0.1:8762/eureka/
+      registry-fetch-interval-seconds: 5 # 获取服务列表的周期：5s
+  instance:
+    preferIpAddress: true
+    ip-address: 127.0.0.1
