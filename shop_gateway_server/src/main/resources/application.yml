@@ -12,6 +12,15 @@ spring:
           #路由条件
           predicates:
             - Path=/order/buy/** #/product/** 匹配规则有很多种，这里的路径要和提供服务的路径一致（即要有对应的路径映射），不然找不到
+  #链路追踪的可视化配置 zipkin
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+    sleuth:
+      sampler:
+        probability: 1.0 #采样的百分比
+
 eureka:
   client:
     serviceUrl:
@@ -20,3 +29,9 @@ eureka:
   instance:
     preferIpAddress: true
     ip-address: 127.0.0.1
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG

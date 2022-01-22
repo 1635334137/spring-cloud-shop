@@ -46,6 +46,12 @@
             <version>1.18.22</version>
         </dependency>
 
+        <!--链路追踪Sleuth 依赖，为每个微服务添加此依赖，所以在父工程进行引入，然后在需要追踪的微服务配置logging日志-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-sleuth</artifactId>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

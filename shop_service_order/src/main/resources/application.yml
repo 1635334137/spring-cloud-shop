@@ -26,6 +26,15 @@ spring:
       #关闭延时加载
       eager: true
 
+  #链路追踪的可视化配置 zipkin
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+    sleuth:
+      sampler:
+        probability: 1.0 #采样的百分比
+
 #在服务消费方配置负载均衡策略，下面为服务提供方id及负载均衡策略
 #com.netflix.loadbalancer.RoundRobinRule ：以轮询的方式进行负载均衡。
 #com.netflix.loadbalancer.RandomRule ：随机策略
@@ -90,6 +99,13 @@ eureka:
 feign:
   sentinel:
     enabled: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+
 
 
 

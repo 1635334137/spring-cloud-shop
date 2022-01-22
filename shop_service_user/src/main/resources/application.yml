@@ -25,3 +25,9 @@ eureka:
     prefer-ip-address: true
     #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG

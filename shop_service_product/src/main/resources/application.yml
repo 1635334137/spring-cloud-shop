@@ -14,6 +14,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
 
+  #链路追踪的可视化配置 zipkin
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+    sleuth:
+      sampler:
+        probability: 1.0 #采样的百分比
+
 server:
   port: 9003
 
@@ -27,6 +36,13 @@ eureka:
     prefer-ip-address: true
     #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
     instance-id: ${spring.cloud.client.ip-address}-1:${server.port}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
+
 ---
 spring:
   profiles: product2
@@ -44,6 +60,16 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57Dialect
 
+  #链路追踪的可视化配置 zipkin
+  zipkin:
+    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+    sender:
+      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+  sleuth:
+    sampler:
+      probability: 1.0 #采样的百分比
+
+
 server:
   port: 9033
 
@@ -57,3 +83,9 @@ eureka:
     prefer-ip-address: true
     #自定义注册名字 ，spring.cloud.client.ip-address为springcloud获取本机ip地址
     instance-id: ${spring.cloud.client.ip-address}-2:${server.port}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web.servlet.DispatcherServlet: DEBUG
+    org.springframework.cloud.sleuth: DEBUG
