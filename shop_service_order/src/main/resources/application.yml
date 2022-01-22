@@ -28,12 +28,27 @@ spring:
 
   #链路追踪的可视化配置 zipkin
   zipkin:
-    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
     sender:
-      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
+      type: rabbit
+#    base-url: http://127.0.0.1:9411/ #zipkin server的请求地址
+#    sender:
+#      type: web #请求方式,默认以http的方式向zipkin server发送追踪数据
     sleuth:
       sampler:
         probability: 1.0 #采样的百分比
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    listener: # 这里配置了重试策略
+      direct:
+        retry:
+          enabled: true
+      simple:
+        retry:
+          enabled: true
 
 #在服务消费方配置负载均衡策略，下面为服务提供方id及负载均衡策略
 #com.netflix.loadbalancer.RoundRobinRule ：以轮询的方式进行负载均衡。
